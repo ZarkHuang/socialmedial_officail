@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "experimentalDecorators": true,
+    "jsx": "preserve",
+    "module": "ES2015"
+  },
+  "exclude": ["node_modules", "dist", "build"]
+}
