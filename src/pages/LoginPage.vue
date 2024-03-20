@@ -1,9 +1,9 @@
 <template>
     <div class="loginPage">
-        <img src="../assets/phone.png" alt="" class="phoneImage" />
+        <img src="../assets/play.png" alt="" class="phoneImage" />
         <div class="loginForm">
             <!-- <img src="../assets/logo.svg" alt="" /> -->
-            <h1>test.</h1>
+            <h1>Record</h1>
             <form @submit.prevent>
                 <input type="email" placeholder="電子信箱" v-model="email" />
                 <input v-if="!isLogin" type="text" placeholder="用戶名稱" v-model="username" />

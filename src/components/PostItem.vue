@@ -5,7 +5,6 @@
         <div class="postInfo">
             <div class="postMeta">
                 <Avatar :src="post?.user?.avatar" />
-                <!-- <span>{{ post?.user?.name }}</span> -->
                 <span> {{ user.name }}</span>
                 <span class="postPubDate">{{ dateToRelative(post.publishedAt) }}</span>
                 <PostActions :likes="post.liked_bies" :comments="post.comments" :favors="post.favored_bies"
@@ -52,13 +51,6 @@ const showPostDetails = (id) => {
     mainStore.changeShowPostDetails(true);
 }
 
-onMounted(() => {
-    postStore.loadAllPosts()
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-        user.value = JSON.parse(storedUser);
-    }
-});
 
 </script>
 <style scoped>

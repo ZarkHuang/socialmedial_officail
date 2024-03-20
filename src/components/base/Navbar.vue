@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar">
-        <router-link to="/">
-            <p class="logo">test</p>
+        <router-link to="/" style="text-decoration: none;">
+            <p class="logo">Record</p>
         </router-link>
         <div class="searchInput">
             <input type="text" @change="searchPosts" />
