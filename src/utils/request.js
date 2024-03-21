@@ -4,6 +4,10 @@ export async function request(
   url,
   { method = "GET", body, headers = {}, auth = true } = {}
 ) {
+  if (auth) {
+    console.log("JWT Token:", getJwtToken());
+  }
+
   if (!(body instanceof FormData)) {
     headers["Content-Type"] = "application/json";
   }
