@@ -22,7 +22,7 @@ export async function createPost(image, description) {
  * @returns
  */
 export async function loadPosts(filters = "") {
-  const backendUrl = "http://localhost:1337";
+  const backendUrl = "https://young-ocean-49769-86e356584f5f.herokuapp.com";
   const response = await request(
     "/api/posts?populate=*" + (filters && `&${filters}`)
   );
