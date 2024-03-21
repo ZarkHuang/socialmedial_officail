@@ -23,7 +23,7 @@ import './assets/base.css'
 import Navbar from './components/base/Navbar.vue';
 import TheLayout from '@/components/TheLayout.vue';
 
-
+console.log(import.meta.env.VITE_API_BASE_URL);
 </script>
 
 <style scoped>
