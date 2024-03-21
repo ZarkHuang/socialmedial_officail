@@ -6,21 +6,8 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     proxy: {
-      "/api": {
-        target: "http://127.0.0.1:1337",
-        changeOrigin: true,
-        secure: false,
-      },
-      "/upload": {
-        target: "http://127.0.0.1:1337",
-        changeOrigin: true,
-        secure: false,
-      },
-      "/uploads": {
-        target: "http://127.0.0.1:1337",
-        changeOrigin: true,
-        secure: false,
-      },
+      "/api": "https://young-ocean-49769-86e356584f5f.herokuapp.com",
+      "/upload": "https://young-ocean-49769-86e356584f5f.herokuapp.com",
     },
   },
   resolve: {
