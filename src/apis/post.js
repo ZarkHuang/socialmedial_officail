@@ -1,6 +1,6 @@
 import { getJwtToken, getUser } from "./auth";
 import { request } from "../utils/request";
-
+console.log(getJwtToken());
 export async function createPost(image, description) {
   const formData = new FormData();
   formData.append("files.image", image);
@@ -22,14 +22,13 @@ export async function createPost(image, description) {
  * @returns
  */
 export async function loadPosts(filters = "") {
-  const backendUrl = "https://young-ocean-49769-86e356584f5f.herokuapp.com";
   const response = await request(
     "/api/posts?populate=*" + (filters && `&${filters}`)
   );
   return response.data.map((post) => ({
     id: post?.id,
     ...post?.attributes,
-    image: backendUrl + post?.attributes?.image?.data?.[0]?.attributes?.url,
+    image: post?.attributes?.image?.data?.[0]?.attributes?.url,
     // image: post?.attributes?.image?.data?.[0]?.attributes?.url,
     user: {
       id: post?.attributes?.user?.data?.id,
