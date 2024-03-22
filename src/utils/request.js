@@ -2,31 +2,22 @@ import { getJwtToken } from "../apis/auth";
 
 export async function request(
   url,
-  { method = "GET", body, headers = {}, auth = true } = {}
+  { method = "GET", body, headers, auth = true } = {}
 ) {
-  if (auth) {
-    console.log("JWT Token:", getJwtToken());
-  }
-
-  if (!(body instanceof FormData)) {
-    headers["Content-Type"] = "application/json";
-  }
-
-  const baseUrl = import.meta.env.VITE_API_BASE_URL;
-  const fullUrl = `${baseUrl}${url}`;
-  const response = await fetch(fullUrl, {
+  const res = await fetch(url, {
     method,
     headers: {
-      ...headers,
+      "Content-Type": "application/json",
       ...(auth && { Authorization: `Bearer ${getJwtToken()}` }),
+      ...headers,
     },
-    body: body instanceof FormData ? body : JSON.stringify(body),
+    ...(body && { body: JSON.stringify(body) }),
   });
-
-  if (!response.ok) {
-    const errorInfo = await response.text();
-    throw new Error(`HTTP error ${response.status}: ${errorInfo}`);
-  }
-
-  return await response.json();
+  // if (res.status < 300) {
+  const result = await res.json();
+  return result;
+  // }
+  // } catch (error) {
+  //   throw error;
+  // }
 }

@@ -3,8 +3,7 @@ import { getJwtToken } from "./auth";
 export async function uploadFile(file) {
   const formData = new FormData();
   formData.append("files", file);
-  const apiUrl = import.meta.env.VITE_APP_HOST_API_URL;
-  const response = await fetch(`${apiUrl}/api/upload`, {
+  const response = await fetch("/api/upload", {
     method: "POST",
     body: formData,
     headers: {
@@ -12,5 +11,5 @@ export async function uploadFile(file) {
     },
   });
   const result = await response.json();
-  return `${apiUrl}${result[0].url}`;
+  return result[0].url;
 }
