@@ -2,22 +2,26 @@ import { getJwtToken } from "../apis/auth";
 
 export async function request(
   url,
-  { method = "GET", body, headers, auth = true } = {}
+  { method = "GET", body, headers = {}, auth = true } = {}
 ) {
-  const res = await fetch(url, {
+  if (!(body instanceof FormData)) {
+    headers["Content-Type"] = "application/json";
+  }
+
+  const response = await fetch(url, {
     method,
     headers: {
       "Content-Type": "application/json",
-      ...(auth && { Authorization: `Bearer ${getJwtToken()}` }),
       ...headers,
+      ...(auth && { Authorization: `Bearer ${getJwtToken()}` }),
     },
-    ...(body && { body: JSON.stringify(body) }),
+    body: body instanceof FormData ? body : JSON.stringify(body),
   });
-  // if (res.status < 300) {
-  const result = await res.json();
-  return result;
-  // }
-  // } catch (error) {
-  //   throw error;
-  // }
+
+  if (!response.ok) {
+    const errorInfo = await response.text();
+    throw new Error(`HTTP error ${response.status}: ${errorInfo}`);
+  }
+
+  return await response.json();
 }
