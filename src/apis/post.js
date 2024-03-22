@@ -1,18 +1,17 @@
 import { getJwtToken, getUser } from "./auth";
 import { request } from "../utils/request";
-console.log(getJwtToken());
+
 export async function createPost(image, description) {
   const formData = new FormData();
   formData.append("files.image", image);
   formData.append("data", JSON.stringify({ description }));
 
-  return await request("/api/posts", {
+  await fetch("/api/posts", {
     method: "POST",
     body: formData,
-    auth: true,
-    // headers: {
-    //   Authorization: `Bearer ${getJwtToken()}`,
-    // },
+    headers: {
+      Authorization: `Bearer ${getJwtToken()}`,
+    },
   });
 }
 
@@ -29,7 +28,6 @@ export async function loadPosts(filters = "") {
     id: post?.id,
     ...post?.attributes,
     image: post?.attributes?.image?.data?.[0]?.attributes?.url,
-    // image: post?.attributes?.image?.data?.[0]?.attributes?.url,
     user: {
       id: post?.attributes?.user?.data?.id,
       ...post?.attributes?.user?.data?.attributes,
