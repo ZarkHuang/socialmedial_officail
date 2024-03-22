@@ -10,9 +10,9 @@ export async function createPost(image, description) {
     method: "POST",
     body: formData,
     auth: true,
-    headers: {
-      Authorization: `Bearer ${getJwtToken()}`,
-    },
+    // headers: {
+    //   Authorization: `Bearer ${getJwtToken()}`,
+    // },
   });
 }
 
