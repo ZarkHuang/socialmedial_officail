@@ -8,7 +8,9 @@ export async function request(
     headers["Content-Type"] = "application/json";
   }
 
-  const response = await fetch(url, {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL;
+  const fullUrl = `${baseUrl}${url}`;
+  const response = await fetch(fullUrl, {
     method,
     headers: {
       "Content-Type": "application/json",
